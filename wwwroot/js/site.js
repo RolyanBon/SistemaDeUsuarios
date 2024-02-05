@@ -1,6 +1,11 @@
 ﻿
 $(document).ready(function () {
-    $('#table-alunos').DataTable({
+    getDatatable('#table-alunos');
+    getDatatable("table-usuarios")
+})
+
+function getDatatable(id) {
+    $(id).DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -28,7 +33,7 @@ $(document).ready(function () {
             }
         }
     });
-});
+}
 
 $('.btn-close').click(function () {
     $('.alert').hide('hide');
