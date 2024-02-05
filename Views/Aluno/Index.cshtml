@@ -1,0 +1,69 @@
+﻿@model List<AlunoModel>
+@{
+    ViewData["Title"] = "Listagem de Alunos";
+}
+
+<br/>
+
+@if(TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close"></button>
+        @TempData["MensagemSucesso"]
+    </div>
+}
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="btn-close"></button>
+        <h4 class="alert-heading">Warning!</h4>
+        @TempData["MensagemErro"]
+    </div>
+}
+
+
+
+<div class="text-center">
+    <br/>
+    <div class="d-grid gap-2 d-md flex justify-content-md-start">
+        <a class="btn btn-outline-primary" role="button" asp-controller="Aluno" asp-action="Criar">
+            Adicionar Novo Aluno
+        </a>
+    </div>
+    <h1>Listagem de Alunos</h1>
+    <br />
+    <table class="table table-dark" id="table-alunos">
+        <thead>
+            <tr class="table-primary">
+                <th>Matrícula</th>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model != null && Model.Any())
+            {
+                foreach(AlunoModel aluno in Model)
+                {
+                    <tr class="table-dark">
+                        <td>@aluno.Matricula</td>
+                        <td>@aluno.Nome</td>
+                        <td>@aluno.Curso</td>
+                        <td>@aluno.Email</td>
+                        <td>@aluno.Celular</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-outline-primary" asp-route-id="@aluno.Id" asp-controller="Aluno" asp-action="Editar">Editar</a>
+                                <a class="btn btn-outline-warning" asp-route-id="@aluno.Id" asp-controller="Aluno" asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
